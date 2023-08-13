@@ -1,6 +1,6 @@
-console.log("не успела доделать задание до конца."/n 
-"секции Coffee Shop, Library card и Contacts yt cjjndtncne.n ibhbyt 768px"/n
-"пункт 2 и пункт3 требований к верстке не соблюдены")
+console.log(["не успела доделать задание до конца."]/n 
+["секции Coffee Shop, Library card и Contacts yt cjjndtncne.n ibhbyt 768px"]/n
+["пункт 2 и пункт3 требований к верстке не соблюдены"])
 
 
 
