@@ -11,6 +11,8 @@ const player = document.querySelector('.player'),
      imgSrc = document.querySelector('.img_src'),
      cover = document.querySelector('.cover_img')
      wrapper = document.querySelector('.wrapper')
+     currentTimePro = document.querySelector('.current_time')
+     totalTime = document.querySelector('.total_duration')
 
 let songIndex = 0;
 /**let isPlaying = false;**/
@@ -62,6 +64,7 @@ function playSong() {
 function pauseSong() {
     player.classList.remove('play')
     cover.classList.remove('active')
+    imgSrc.src = './img/play.svg'
     audio.pause()
 }
 
@@ -73,5 +76,60 @@ playBtn.addEventListener('click' , () => {
         playSong()
     }
 })
+
+function nextTrack () {
+    if(songIndex + 1 > musicList.length - 1) {
+        songIndex = 0;
+    } else {
+    songIndex++
+    }
+    loadSong(songIndex)
+    playSong()
+}
+
+nextBtn.addEventListener('click' , nextTrack)
+
+function prevTrack () {
+    if(songIndex - 1 < 0) {
+        songIndex = musicList.length - 1;
+    } else {
+    songIndex--
+    }
+    loadSong(songIndex)
+    playSong()
+}
+
+prevBtn.addEventListener('click' , prevTrack)
+
+
+function updateProgress(element) {
+    const { duration, currentTime } = element.srcElement;
+    const progressPercent = (currentTime / duration) * 100;
+    progress.style.width = `${progressPercent}%`;
+  
+    currentTimePro.textContent = currentTime ? formatTime(currentTime) : '0:00';
+  
+    // Check if duration is a valid number before updating totalTime
+    if (!isNaN(duration)) {
+      totalTime.textContent = formatTime(duration);
+    }
+  }
+audio.addEventListener('timeupdate', updateProgress);
+
+function setProgress (element) {
+    const width = this.clientWidth
+    const clickX = element.offsetX
+    const duration = audio.duration
+    audio.currentTime = (clickX / width) * duration
+}
+progressContainer.addEventListener('click' , setProgress)
+
+function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = Math.floor(seconds % 60);
+    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+  }
+
+audio.addEventListener('ended' , nextTrack)
 
 

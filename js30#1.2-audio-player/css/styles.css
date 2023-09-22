@@ -12,7 +12,7 @@
     display:flex;
     justify-content: center;
     align-items: center;
-    background-image: url('cover0.jpeg');
+    background-image: url('./img/cover0.jpeg');
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
@@ -37,8 +37,12 @@
     margin: 2.5em 0;
 }
 
+.cover_img {
+    border-radius: 30%;
+}
+
 .active {
-    animation: rotateAnimation 10s linear infinite;
+    animation: rotateAnimation 20s linear infinite;
 }
 
 .song {
@@ -69,8 +73,9 @@
     background: darkblue;
     border-radius: 50%;
     height: 0.6em;
-    width: 15em;
+    /**width: 15em;**/
 }
+
 .buttons {
     display: flex;
     justify-content: space-between;
