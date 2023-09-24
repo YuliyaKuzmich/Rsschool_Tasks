@@ -15,12 +15,10 @@ const player = document.querySelector('.player'),
      totalTime = document.querySelector('.total_duration')
 
 let songIndex = 0;
-/**let isPlaying = false;**/
-let updateTimer;
 
 const musicList = [
         {
-            img: 'img/cover0.jpeg' ,
+            img: 'img/cover0.jpeg' ,  
             name : 'Kupalinka' ,
             artist : 'ŠUMA' ,
             music : 'audio/Kupalinka.wav'
@@ -31,24 +29,15 @@ const musicList = [
             artist : 'IMAGINE DRAGONS' ,
             music : 'audio/Thunder.mp3'
         }
-    ]
+]
 
 function loadSong(songIndex){
-    clearInterval(updateTimer);
-        // reset();
-        // currTrack.src =  musicList[songIndex].music;
-        // currTrack.load();
-    
     wrapper.style.backgroundImage = `url('${musicList[songIndex].img}')`;
-        cover.src = musicList[songIndex].img;
-        audio.src = musicList[songIndex].music;
-        song.textContent = musicList[songIndex].name;
-        singer.textContent = musicList[songIndex].artist;
-        nowPlaying.textContent = "Playing music " + (songIndex + 1) + " of " + musicList.length;
-    
-        // updateTimer = setInterval(setUpdate, 1000);
-    
-        /**currTrack.addEventListener('ended', nextTrack);**/
+    cover.src = musicList[songIndex].img;
+    audio.src = musicList[songIndex].music;
+    song.textContent = musicList[songIndex].name;
+    singer.textContent = musicList[songIndex].artist;
+    nowPlaying.textContent = "Playing music " + (songIndex + 1) + " of " + musicList.length;
 }
 
 loadSong(songIndex);
@@ -128,7 +117,7 @@ function formatTime(seconds) {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = Math.floor(seconds % 60);
     return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
-  }
+}
 
 audio.addEventListener('ended' , nextTrack)
 
