@@ -3,19 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random game</title>
+    <title>Catch-a-mole</title>
     <link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
-
-    <h2>Computer Choice: <span id="computer-choice"></span></h2>
-    <h2>User Choice: <span id="user-choice"></span></h2>
-    <h2>Result: <span id="result"></span></h2>
-
-    <button id="rock">rock</button>
-    <button id="paper">paper</button>
-    <button id="scissors">scissors</button>
-
+    <div class="wrapper">
+        <h1 class='title'>Catch a mole</h1>
+        <div class="score_time_block">
+            <div class="description_score">
+                <h2>Your score:</h2>
+                <h2 id="score">0</h2>
+            </div>
+            <div class="description_time">
+                <h2>Time Left:</h2>
+                <h2 id="time-left">30</h2>
+            </div>
+        </div>
+        <div class="play_block">
+            <div class="counter">
+            <h2 class="score_counter">Last 10 Scores:</h2>
+                <ul id="last-10-scores"></ul>
+            </div>
+                <div class="grid">
+                <div class="square" id="1"></div>
+                <div class="square" id="2"></div>
+                <div class="square" id="3"></div>
+                <div class="square" id="4"></div>
+                <div class="square" id="5"></div>
+                <div class="square" id="6"></div>
+                <div class="square" id="7"></div>
+                <div class="square" id="8"></div>
+                <div class="square" id="9"></div>
+            </div>
+        </div>
+    </div>
     <footer class="footer">
         <div class="git_hub">
             <a href="https://github.com/YuliyaKuzmich" class="link_to_git">Git Hub</a>
@@ -24,7 +45,7 @@
             <p class="current_year">2023</p>
         </div>
         <div class="link">
-            <a href="https://rs.school/"><img src="./images/logo_rs.svg" alt="logo Rss" width="70" height="70" class="link_to_rssch"></a>
+            <a href="https://rs.school/"><img src="./img/logo_rs.svg" alt="logo Rss" width="70" height="70" class="link_to_rssch"></a>
         </div>
     </footer>
     <script src="./script.js"></script>
