@@ -16,7 +16,9 @@ h2 {
 .wrapper {
 	display: flex;
 	flex-direction:column ;
-	margin: 5em;
+	margin: 2em;
+    max-width: 100%;
+    max-height: 90vh;
 }
 
 .title {
@@ -28,7 +30,8 @@ h2 {
 .score_time_block {
 	display: flex;
 	flex-direction: row;
-	gap: 5em;
+	justify-content: center;
+    gap: 2em;
 	margin-bottom: 2em;
 	margin-top: 2em;
 }
@@ -39,6 +42,13 @@ h2 {
 	gap: 1em;
 }
 
+.start-button {
+    background-color: brown;
+    color:whitesmoke;
+    font-size: 1.5em;
+    width: 4em;
+}
+
 .description_time {
 	display: flex;
 	flex-direction: row;
@@ -46,8 +56,8 @@ h2 {
 }
 
 .grid {
-	width: 606px;
-	height: 606px;
+	width: 516px;
+	height: 516px;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -55,8 +65,8 @@ h2 {
 }
 
 .square {
-	height: 200px;
-	width: 200px;
+	height: 170px;
+	width: 170px;
 	border: solid black 1px;
 }
 
@@ -67,6 +77,9 @@ h2 {
 .play_block {
 	display: flex;
 	flex-direction: row;
+    /**justify-content: center;**/
+    margin-left: 5em;
+    gap: 6em;
 }
 
 .counter {
@@ -79,6 +92,13 @@ h2 {
 	margin-right: 5em;
 }
 
+li {
+    list-style-type: none;
+    font-size: 1.5em;
+    border: 1px solid black;
+    list-style-position: inside;
+}
+
 .score_counter {
 	margin-right: 2em;
 }
@@ -88,7 +108,7 @@ h2 {
 	flex-direction: row;
 	justify-content: space-between;
 	max-width: 100%;
-	height: 10vh;
+	/**height: 10vh;**/
 	align-items: center;
 }
   
