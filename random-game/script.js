@@ -6,32 +6,41 @@ const score = document.querySelector('#score');
 
 let result = 0;
 let hitPosition;
-let currentTime = 30;
+let currentTime = 20;
 let timerId = null;
 let gameInterval = null;
 
 function startGame() {
-  result = 0;
-  currentTime = 30;
-  score.textContent = result;
-  timeLeft.textContent = currentTime;
-
-  clearInterval(timerId); // Clear the existing mole movement
-  clearInterval(gameInterval); // Clear the countdown timer
-
-  moveMole(); // Start the mole movement
-  gameInterval = setInterval(countDown, 1000); // Start the countdown timer
-  startButton.disabled = true; // Disable the Start button while the game is in progress
-}
+    result = 0;
+    currentTime = 20;
+    score.textContent = result;
+    timeLeft.textContent = currentTime;
+  
+    clearInterval(timerId); // Clear the existing mole movement
+    clearInterval(gameInterval); // Clear the countdown timer
+  
+    // Play the music
+    const audio = document.getElementById('game-audio');
+    audio.play();
+  
+    moveMole(); // Start the mole movement
+    gameInterval = setInterval(countDown, 1000); // Start the countdown timer
+    startButton.disabled = true; // Disable the Start button while the game is in progress
+}  
 
 function stopGame() {
-  clearInterval(timerId); // Clear the mole movement
-  clearInterval(gameInterval); // Clear the countdown timer
-  startButton.disabled = false; // Enable the Start button
-  alert('GAME OVER! Your final score is ' + result);
-  storeScore(result); // Store the current score
-  displayLast10Scores(); // Update the scores list
-}
+    clearInterval(timerId); // Clear the mole movement
+    clearInterval(gameInterval); // Clear the countdown timer
+  
+    // Pause the music
+    const audio = document.getElementById('game-audio');
+    audio.pause();
+  
+    startButton.disabled = false; // Enable the Start button
+    alert('GAME OVER! Your final score is ' + result);
+    storeScore(result); // Store the current score
+    displayLast10Scores(); // Update the scores list
+}  
 
 startButton.addEventListener('click', startGame);
 
@@ -45,6 +54,8 @@ function randomSquare() {
 
   hitPosition = randomSquare.id;
 }
+
+randomSquare();
 
 squares.forEach(square => {
   square.addEventListener('mousedown', () => {
