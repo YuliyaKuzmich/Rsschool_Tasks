@@ -1,53 +1,76 @@
-const computerChoiceDisplay =  document.getElementById('computer-choice')
-const userChoiceDisplay =  document.getElementById('user-choice')
-const resultDisplay =  document.getElementById('result')
-const possibleChoices = document.querySelectorAll('button')
-let userChoice
-let computerChoice
+const squares = document.querySelectorAll('.square');
+const mole = document.querySelector('.mole');
+const timeLeft = document.querySelector('#time-left');
+const score = document.querySelector('#score');
 
-possibleChoices.forEach(possibleChoices => possibleChoices.addEventListener('click', (e) => {
-    userChoice = e.target.id
-    userChoiceDisplay.innerHTML = userChoice
-    generateComputerChoice()
-    getResult()
-}))
+let result = 0;
+let hitPosition;
+let currentTime = 30;
+let timerId = null;
 
-function generateComputerChoice() {
-    const randomNumber = Math.floor(Math.random() * 3) + 1
-    
-    if (randomNumber === 1) {
-        computerChoice = 'rock'
-    }
-    if (randomNumber === 2) {
-        computerChoice = 'scissors'
-    }
-    if (randomNumber === 3) {
-        computerChoice = 'paper'
-    }
-    computerChoiceDisplay.innerHTML = computerChoice
+function randomSquare() {
+  squares.forEach(square => {
+    square.classList.remove('mole');
+  });
+
+  let randomSquare = squares[Math.floor(Math.random() * 9)];
+  randomSquare.classList.add('mole');
+
+  hitPosition = randomSquare.id;
 }
 
-function getResult() {
-    if (computerChoice === userChoice) {
-        result = 'its a draw!'
+squares.forEach(square => {
+  square.addEventListener('mousedown', () => {
+    if (square.id == hitPosition) {
+      result++;
+      score.textContent = result;
+      hitPosition = null;
     }
-    if (computerChoice === 'rock'&& userChoice === 'paper') {
-        result = 'you win!'
-    }
-    if (computerChoice === 'rock' && userChoice === 'scissors') {
-        result = 'you lost!'
-    }
-    if (computerChoice === 'paper' && userChoice === 'scissors') {
-        result = 'you win!'
-    }
-    if (computerChoice === 'paper' && userChoice === 'rock') {
-        result = 'you lose!'
-    }
-    if (computerChoice === 'scissors' && userChoice === 'rock') {
-        result = 'you win!'
-    }
-    if (computerChoice === 'scissors' && userChoice === 'paper') {
-        result = 'you lose!'
-    }
-    resultDisplay.innerHTML = result
+  });
+});
+
+function moveMole() {
+  timerId = setInterval(randomSquare, 750);
 }
+
+moveMole();
+
+function countDown() {
+  currentTime--;
+  timeLeft.textContent = currentTime;
+
+  if (currentTime == 0) {
+    clearInterval(countDownTimerId);
+    clearInterval(timerId);
+    alert('GAME OVER! Your final score is ' + result);
+    storeScore(result); // Store the current score
+    displayLast10Scores(); // Update the scores list
+  }
+}
+
+let countDownTimerId = setInterval(countDown, 1000);
+
+function storeScore(score) {
+  const scores = JSON.parse(localStorage.getItem('scores')) || [];
+  scores.push(score);
+  localStorage.setItem('scores', JSON.stringify(scores));
+}
+
+function getLast10Scores() {
+  const scores = JSON.parse(localStorage.getItem('scores')) || [];
+  return scores.slice(-10); // Get the last 10 scores
+}
+
+function displayLast10Scores() {
+  const last10Scores = getLast10Scores().reverse(); // Reverse the order
+  const scoresList = document.getElementById('last-10-scores');
+  scoresList.innerHTML = ''; // Clear previous scores
+
+  last10Scores.forEach((score, index) => {
+    const listItem = document.createElement('li');
+    listItem.textContent = `Game ${index + 1}: ${score}`;
+    scoresList.appendChild(listItem);
+  });
+}
+
+displayLast10Scores(); // Display scores on page load
